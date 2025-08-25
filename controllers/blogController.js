@@ -25,15 +25,18 @@ const getPostById = async (req, res) => {
 
 const createPost = async (req, res) => {
   const { title, summary, content } = req.body;
-
-  // Verifica que se haya subido un archivo
-  if (!req.file) {
-    return res.status(400).json({ message: 'No se subió ninguna imagen.' });
-  }
-  const image = req.file.path; // Obtiene la ruta del archivo subido
+  
+  // --- MEJORA: La imagen ahora es opcional ---
+  // Si se subió un archivo (req.file existe), usamos su ruta. Si no, no se asigna imagen.
+  const image = req.file ? req.file.path : undefined; 
 
   try {
-    const post = new BlogPost({ title, summary, content, image });
+    const post = new BlogPost({ 
+        title, 
+        summary, 
+        content, 
+        image // Será undefined si no se subió imagen, y Mongoose no lo guardará
+    });
     const createdPost = await post.save();
     res.status(201).json(createdPost);
   } catch (error) {
