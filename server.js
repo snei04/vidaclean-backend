@@ -27,9 +27,8 @@ const app = express();
 // ▼▼▼ ESTE ES EL BLOQUE MODIFICADO ▼▼▼
 // Configuración de CORS para producción
 const corsOptions = {
-  // Aquí pondrás la URL de tu frontend una vez que lo despliegues
-  // Por ahora, permitimos el acceso desde tu localhost
-  origin: ['http://localhost:3000', 'https://vidaclean-frontend.vercel.app'],
+  // Aquí pones la URL de tu frontend de Vercel
+  origin: ['https://vidaclean-frontend.vercel.app', 'http://localhost:3000'],
   optionsSuccessStatus: 200
 };
 app.use(cors(corsOptions));
