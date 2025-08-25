@@ -29,7 +29,7 @@ const app = express();
 const corsOptions = {
   // Aquí pondrás la URL de tu frontend una vez que lo despliegues
   // Por ahora, permitimos el acceso desde tu localhost
-  origin: ['http://localhost:3000', 'https://tu-sitio-en-vercel.com'], 
+  origin: ['http://localhost:3000', 'https://vidaclean-frontend.vercel.app'],
   optionsSuccessStatus: 200
 };
 app.use(cors(corsOptions));
