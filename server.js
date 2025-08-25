@@ -24,17 +24,18 @@ const app = express();
 
 // --- MIDDLEWARES ---
 
-// ▼▼▼ ESTE ES EL BLOQUE MODIFICADO ▼▼▼
-// Configuración de CORS para producción
+// 1. Define las opciones de CORS primero
 const corsOptions = {
-  // Aquí pones la URL de tu frontend de Vercel
   origin: ['https://vidaclean-frontend.vercel.app', 'http://localhost:3000'],
   optionsSuccessStatus: 200
 };
-app.use(cors(corsOptions));
-// ▲▲▲ FIN DEL BLOQUE MODIFICADO ▲▲▲
 
+// 2. Luego, usa las opciones en el middleware
+app.use(cors(corsOptions));
 app.use(express.json());
+
+// 3. Servir archivos estáticos (imágenes)
+app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
 
 
 // --- Conexión de Rutas ---
@@ -43,9 +44,6 @@ app.use('/api/auth', authRoutes);
 app.use('/api/requests', requestRoutes);
 app.use('/api/blog', blogRoutes);
 app.use('/api/content', contentRoutes);
-
-// Servir archivos estáticos (imágenes)
-app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
 
 
 // --- Función para poblar la DB ---
